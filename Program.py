@@ -24,6 +24,9 @@ account.establish({
     'SSEA': 1500000,
     'BTC':  500000
 })
+account.market.next_day()
+qm.SimpleGridTrading()
+
 
 
 print(account.history)
