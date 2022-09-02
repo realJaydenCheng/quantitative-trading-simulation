@@ -44,7 +44,10 @@ class Account(object):
             colors=['red']
             )
         plt.gcf().autofmt_xdate()
-        plt.show()
+        return plt
+
+    def trade_details_plot(self):
+        pass
 
     def buy(self, name: str, value: int) -> bool:
         if value > self.balance:

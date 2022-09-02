@@ -52,7 +52,7 @@ class Market(object):
             color=edge_colors
         )
         plt.gcf().autofmt_xdate()
-        plt.show()
+        return plt
 
     def volume_plot(self, name: str, start_time: dt.datetime):
         plt.xlabel("Date")
@@ -67,4 +67,4 @@ class Market(object):
             color='c'
         )
         plt.gcf().autofmt_xdate()
-        plt.show()
+        return plt
