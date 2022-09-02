@@ -25,7 +25,7 @@ class SimpleGridTrade(object):
                 v.closed[self.account.market.today]
             )
             self._grid_change[k] = (0,0)
-        self.account.market.next_day()
+        self.account.next_day()
 
     def run(self) -> None:
         for _ in range(self.duration):
@@ -52,5 +52,5 @@ class SimpleGridTrade(object):
                     elif _grid_change_temp[-1] < _grid_change_temp[0]:
                         self.account.buy(k,self.batch)
                 self._grid_change[k] = _grid_change_temp
-            self.account.market.next_day()
+            self.account.next_day()
                     

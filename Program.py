@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import datetime as dt
 # import seaborn as sns
 
-TEST_DAYS = 200
+TEST_DAYS = 183
 START_DAY = dt.datetime(2022, 3, 1)
 CAPITAL = 5000000
 
@@ -34,7 +34,7 @@ trader = qm.SimpleGridTrade(
 )
 
 trader.run()
-print(account.history)
+print(account.revenue_details)
 print(account.asset)
 # market.candle_plot('BTC',START_DAY)
 # market.volume_plot('BTC',START_DAY)
