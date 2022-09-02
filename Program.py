@@ -7,7 +7,7 @@ import datetime as dt
 TEST_DAYS = 183
 START_DAY = dt.datetime(2022, 3, 1)
 CAPITAL = 5000000
-
+GRID = [0.97, 0.98, 0.99, 1, 1.01, 1.02, 1.03]
 
 market_data = {
     'SSEA': pd.read_csv('./data/ssea.csv', index_col='date', parse_dates=True),
@@ -15,15 +15,10 @@ market_data = {
     'Brent': pd.read_excel('./data/Brent.xlsx', 'Brent', index_col='date')
 }
 
-market = qm.Market(
-    market_data=market_data,
-    start_time=START_DAY
-)
-
-account = qm.Account(market, CAPITAL)
+account = qm.Account(market_data,START_DAY, CAPITAL)
 trader = qm.SimpleGridTrade(
     account=account,
-    grid=[0.97, 0.98, 0.99, 1, 1.01, 1.02, 1.03],
+    grid=GRID,
     batch=50000,
     duration=TEST_DAYS,
     establish={

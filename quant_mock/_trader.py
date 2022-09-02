@@ -6,14 +6,18 @@ import matplotlib.pyplot as plt
 
 class Account(object):
     def __init__(self,
-                 market: Market,
+                 market_data: dict,
+                 start_time:dt.datetime,
                  balance: int
                  ) -> None:
-        self.market = market
+        self.market = Market(
+            market_data=market_data,
+            start_time=start_time
+        )
         self.capital = balance
         self.balance = balance
         self.position = {}
-        for key in market._market_data.keys():
+        for key in self.market._market_data.keys():
             self.position[key] = [0, 0]
         self.history = pd.DataFrame(
             columns=['date', 'name', 'change', 'position', 'price', 'balance', 'asset'])
