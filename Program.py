@@ -1,8 +1,6 @@
 import quant_mock as qm
 import pandas as pd
-import matplotlib.pyplot as plt
 import datetime as dt
-# import seaborn as sns
 
 TEST_DAYS = 152
 START_DAY = dt.datetime(2022, 4, 1)

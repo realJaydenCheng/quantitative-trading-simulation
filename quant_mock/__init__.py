@@ -3,8 +3,13 @@ from quant_mock._trader import *
 import numpy as np
 import pandas as pd
 
+class Strategy(object):
+    def __init__(self,account:Account,duration:int) -> None:
+        pass
+    def run(self) -> None:
+        pass
 
-class SimpleGridTrade(object):
+class SimpleGridTrade(Strategy):
     def __init__(self,
                  account: Account,
                  grid: list,
@@ -39,11 +44,11 @@ class SimpleGridTrade(object):
                 _grid_change_temp = (
                     self._grid_change[k][-1],
                     pd.cut([v.open[self.account.market.today]],self.grid*self._grid_refers[k][0],labels=self.labels)[0]
-                )
+                ) # 用于后续比较是否为假突破
                 if np.isnan(self._grid_change[k][-1]):
                     print(f"{k} out of range at {self.account.market.today}")
                 if sorted(_grid_change_temp) == self._grid_change[k]:
-                    continue
+                    continue # 假突破 不交易
                 else :
                     if _grid_change_temp[-1] == _grid_change_temp[0]:
                         continue

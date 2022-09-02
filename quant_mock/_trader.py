@@ -59,7 +59,6 @@ class Account(object):
         fig.scatter(x=data.date,y=data.price,c=colors)
         return fig
 
-
     def buy(self, name: str, value: int) -> bool:
         if value > self.balance:
             return False
