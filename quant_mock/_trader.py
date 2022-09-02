@@ -27,6 +27,7 @@ class Account(object):
         self.revenue_details = pd.DataFrame(columns=_revenue_details)
 
     def revenue_plot(self):
+        plt.figure(figsize=(14,5))
         plt.xlabel("Date")
         plt.ylabel("Rate")
         ax = plt.gca()
@@ -52,11 +53,9 @@ class Account(object):
         fig = self.market.candle_plot(name,self.start_time)
         _in = data.change>0
         _out = data.change<0
-        colors = np.zeros(_in.size, dtype="U5")
-        colors[:] = "white"
-        colors[_in] = "c"
-        colors[_out] = "y"
-        fig.scatter(x=data.date,y=data.price,c=colors)
+        fig.scatter(x=data[_in].date,y=data[_in].price,color='c',label='buy')
+        fig.scatter(x=data[_out].date,y=data[_out].price,color='y',label='sell')
+        fig.legend()
         return fig
 
     def buy(self, name: str, value: int) -> bool:

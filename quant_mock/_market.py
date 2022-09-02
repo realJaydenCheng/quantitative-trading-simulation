@@ -23,7 +23,7 @@ class Market(object):
         self._market_data[name] = data
 
     def candle_plot(self, name: str, start_time: dt.datetime):
-        plt.figure(figsize=(10,3))
+        plt.figure(figsize=(14,5))
         plt.xlabel("Date")
         plt.ylabel("Price")
         data = self[name][start_time:]
@@ -56,7 +56,7 @@ class Market(object):
         return plt
 
     def volume_plot(self, name: str, start_time: dt.datetime):
-        plt.figure(figsize=(10,3))
+        plt.figure(figsize=(14,5))
         plt.xlabel("Date")
         plt.ylabel("Volume")
         ax = plt.gca()
