@@ -10,9 +10,9 @@ CAPITAL = 5000000
 
 
 market_data = {
-    # 'SSEA': pd.read_csv('./ssea.csv', index_col='date', parse_dates=True),
-    # 'BTC': pd.read_excel('./Bitcoin.xlsx', 'Bitcoin', index_col='date'),
-    'Brent': pd.read_excel('./Brent.xlsx', 'Brent', index_col='date')
+    # 'SSEA': pd.read_csv('./data/ssea.csv', index_col='date', parse_dates=True),
+    # 'BTC': pd.read_excel('./data/Bitcoin.xlsx', 'Bitcoin', index_col='date'),
+    'Brent': pd.read_excel('./data/Brent.xlsx', 'Brent', index_col='date')
 }
 
 market = qm.Market(
