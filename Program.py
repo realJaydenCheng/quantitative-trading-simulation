@@ -10,8 +10,8 @@ CAPITAL = 5000000
 
 
 market_data = {
-    # 'SSEA': pd.read_csv('./data/ssea.csv', index_col='date', parse_dates=True),
-    # 'BTC': pd.read_excel('./data/Bitcoin.xlsx', 'Bitcoin', index_col='date'),
+    'SSEA': pd.read_csv('./data/ssea.csv', index_col='date', parse_dates=True),
+    'BTC': pd.read_excel('./data/Bitcoin.xlsx', 'Bitcoin', index_col='date'),
     'Brent': pd.read_excel('./data/Brent.xlsx', 'Brent', index_col='date')
 }
 
@@ -29,12 +29,13 @@ trader = qm.SimpleGridTrade(
     establish={
         # 'SSEA': 500000,
         # 'BTC': 500000,
-        'Brent':1000000
+        # 'Brent':1000000
     }
 )
 
 trader.run()
 print(account.revenue_details)
-print(account.asset)
+# market.candle_plot('Brent',START_DAY)
+account.revenue_plot()
 # market.candle_plot('BTC',START_DAY)
 # market.volume_plot('BTC',START_DAY)

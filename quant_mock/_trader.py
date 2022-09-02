@@ -1,6 +1,7 @@
 from quant_mock._market import *
 
 import pandas as pd
+import matplotlib.pyplot as plt
 
 
 class Account(object):
@@ -9,18 +10,37 @@ class Account(object):
                  balance: int
                  ) -> None:
         self.market = market
+        self.capital = balance
         self.balance = balance
         self.position = {}
         for key in market._market_data.keys():
             self.position[key] = [0, 0]
         self.history = pd.DataFrame(
             columns=['date', 'name', 'change', 'position', 'price', 'balance', 'asset'])
-        _revenue_details = ['asset','balance']
+        _revenue_details = ['asset','rate','balance']
         _revenue_details.extend([name for name in self.position.keys()])
         self.revenue_details = pd.DataFrame(columns=_revenue_details)
 
-    def revenue_plot():
-        pass
+    def revenue_plot(self):
+        plt.xlabel("Date")
+        plt.ylabel("Rate")
+        ax = plt.gca()
+        ax.xaxis.set_major_locator(md.WeekdayLocator(byweekday=md.MO))
+        ax.xaxis.set_major_formatter(md.DateFormatter('%Y-%m-%d'))
+        ax.xaxis.set_minor_locator(md.DayLocator())
+        plt.plot(self.revenue_details.index,self.revenue_details.rate)
+        plt.ylim(
+            min(self.revenue_details.rate)-0.02,
+            max(self.revenue_details.rate)+0.01
+        )
+        plt.hlines(0,
+            self.revenue_details.index[0]-dt.timedelta(3),
+            self.revenue_details.index[-1]+dt.timedelta(3),
+            linestyles=":",
+            colors=['red']
+            )
+        plt.gcf().autofmt_xdate()
+        plt.show()
 
     def buy(self, name: str, value: int) -> bool:
         if value > self.balance:
@@ -78,6 +98,7 @@ class Account(object):
             ])
         }
         asset_dict.update(dict([(k,v[0]) for k,v in self.position.items()]))
+        asset_dict.update({'rate':asset_dict['asset']/self.capital-1})
         self.revenue_details = pd.concat([
             self.revenue_details,
             pd.DataFrame(asset_dict,index=[self.market.today])
