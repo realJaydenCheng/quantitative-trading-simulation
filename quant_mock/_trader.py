@@ -14,6 +14,7 @@ class Account(object):
             market_data=market_data,
             start_time=start_time
         )
+        self.start_time = start_time
         self.capital = balance
         self.balance = balance
         self.position = {}
@@ -46,8 +47,18 @@ class Account(object):
         plt.gcf().autofmt_xdate()
         return plt
 
-    def trade_details_plot(self):
-        pass
+    def trade_details_plot(self,name:str):
+        data = self.history[self.history.name == name]
+        fig = self.market.candle_plot(name,self.start_time)
+        _in = data.change>0
+        _out = data.change<0
+        colors = np.zeros(_in.size, dtype="U5")
+        colors[:] = "white"
+        colors[_in] = "c"
+        colors[_out] = "y"
+        fig.scatter(x=data.date,y=data.price,c=colors)
+        return fig
+
 
     def buy(self, name: str, value: int) -> bool:
         if value > self.balance:
