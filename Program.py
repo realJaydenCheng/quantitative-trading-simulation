@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import datetime as dt
 # import seaborn as sns
 
-TEST_DAYS = 242
+TEST_DAYS = 240
 START_DAY = dt.datetime(2022, 1, 4)
 CAPITAL = 5000000
 
@@ -20,15 +20,18 @@ market = qm.Market(
 )
 
 account = qm.Account(market, CAPITAL)
-account.establish({
-    'SSEA': 1500000,
-    'BTC':  500000
-})
-account.market.next_day()
-qm.SimpleGridTrading()
+trader = qm.SimpleGridTrade(
+    account=account,
+    grid=[0.97, 0.98, 0.99, 1, 1.01, 1.02, 1.03],
+    batch=50000,
+    duration=TEST_DAYS,
+    establish={
+        'SSEA': 1500000,
+        'BTC': 500000
+    }
+)
 
-
-
+trader.run()
 print(account.history)
 # market.candle_plot('BTC',START_DAY)
 # market.volume_plot('BTC',START_DAY)
