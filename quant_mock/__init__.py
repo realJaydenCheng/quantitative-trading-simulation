@@ -1,5 +1,5 @@
-from QuantMock._market import *
-from QuantMock._trader import *
+from quant_mock._market import *
+from quant_mock._trader import *
 import numpy as np
 import pandas as pd
 
